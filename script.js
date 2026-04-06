@@ -1,15 +1,15 @@
-// === NAVBAR SCROLL ===
-const navbar = document.getElementById('navbar');
-let lastScroll = 0;
+// ============================================
+// JOICE LEITE — ANIMATION SYSTEM
+// Premium motion design: stagger reveals,
+// parallax, counters, tilt cards, magnetic CTAs
+// ============================================
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// === NAVBAR ===
+const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  const currentScroll = window.scrollY;
-  if (currentScroll > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-  lastScroll = currentScroll;
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
 // === MOBILE MENU ===
@@ -18,85 +18,290 @@ const navLinks = document.getElementById('navLinks');
 
 navToggle.addEventListener('click', () => {
   navLinks.classList.toggle('active');
-  navToggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+  navToggle.classList.toggle('open');
 });
 
-// Close menu on link click
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     navLinks.classList.remove('active');
+    navToggle.classList.remove('open');
   });
 });
 
-// === SMOOTH SCROLL FOR ANCHOR LINKS ===
+// === SMOOTH SCROLL ===
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', (e) => {
     const href = anchor.getAttribute('href');
     if (href === '#') return;
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
-// === SCROLL REVEAL ANIMATION ===
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
+// === HERO STAGGERED ENTRANCE ===
+function animateHero() {
+  if (prefersReducedMotion) return;
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
+  const elements = [
+    { el: '.hero-badge', delay: 200 },
+    { el: '.hero-title', delay: 500 },
+    { el: '.hero-subtitle', delay: 800 },
+    { el: '.hero-actions', delay: 1100 },
+    { el: '.hero-trust', delay: 1400 },
+  ];
 
-// Observe all animatable elements
-document.querySelectorAll(
-  '.problem-card, .service-card, .step-card, .testimonial-card, .contact-card, .section-header, .about-content, .lead-magnet-content'
-).forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(24px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  observer.observe(el);
-});
+  elements.forEach(({ el, delay }) => {
+    const node = document.querySelector(el);
+    if (!node) return;
+    node.style.opacity = '0';
+    node.style.transform = 'translateY(30px)';
+    node.style.transition = 'none';
 
-// Add revealed class styles
-const style = document.createElement('style');
-style.textContent = `
-  .revealed {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-`;
-document.head.appendChild(style);
-
-// Respect reduced motion
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('.problem-card, .service-card, .step-card, .testimonial-card, .contact-card, .section-header, .about-content, .lead-magnet-content').forEach(el => {
-    el.style.opacity = '1';
-    el.style.transform = 'none';
-    el.style.transition = 'none';
+    setTimeout(() => {
+      node.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      node.style.opacity = '1';
+      node.style.transform = 'translateY(0)';
+    }, delay);
   });
 }
 
-// === LEAD FORM (placeholder) ===
-const leadForm = document.getElementById('leadForm');
-if (leadForm) {
-  leadForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('leadName').value;
-    const whatsapp = document.getElementById('leadWhatsapp').value;
+// === TEXT ACCENT SHIMMER ===
+function initAccentShimmer() {
+  if (prefersReducedMotion) return;
+  const accent = document.querySelector('.text-accent');
+  if (!accent) return;
 
-    // Placeholder - replace with actual form handling
-    alert(`Obrigada, ${name}! Em breve você receberá o guia no WhatsApp ${whatsapp}.`);
-    leadForm.reset();
+  setTimeout(() => {
+    accent.classList.add('shimmer-active');
+  }, 1800);
+}
+
+// === SCROLL REVEAL WITH STAGGER ===
+function initScrollReveal() {
+  if (prefersReducedMotion) {
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.revealDelay || '0');
+        const direction = el.dataset.reveal || 'up';
+
+        setTimeout(() => {
+          el.classList.add('revealed');
+        }, delay);
+
+        revealObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  // Tag all revealable elements
+  const revealGroups = [
+    { selector: '.section-header', reveal: 'up' },
+    { selector: '.problem-card', reveal: 'up', stagger: 80 },
+    { selector: '.problems-cta', reveal: 'up' },
+    { selector: '.service-card', reveal: 'up', stagger: 150 },
+    { selector: '.services-cta', reveal: 'up' },
+    { selector: '.step-card', reveal: 'up', stagger: 200 },
+    { selector: '.step-connector', reveal: 'fade', stagger: 300 },
+    { selector: '.about-image', reveal: 'left' },
+    { selector: '.about-text', reveal: 'right' },
+    { selector: '.testimonial-card', reveal: 'up', stagger: 150 },
+    { selector: '.lead-magnet-text', reveal: 'left' },
+    { selector: '.lead-magnet-form', reveal: 'right' },
+    { selector: '.contact-card', reveal: 'up', stagger: 120 },
+  ];
+
+  revealGroups.forEach(group => {
+    const elements = document.querySelectorAll(group.selector);
+    elements.forEach((el, i) => {
+      el.dataset.reveal = group.reveal;
+      el.dataset.revealDelay = group.stagger ? (i * group.stagger).toString() : '0';
+      revealObserver.observe(el);
+    });
   });
+}
+
+// === ANIMATED COUNTER ===
+function initCounters() {
+  if (prefersReducedMotion) return;
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(el => {
+    counterObserver.observe(el);
+  });
+}
+
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const duration = 2000;
+  const start = performance.now();
+  const prefix = el.dataset.countPrefix || '';
+  const suffix = el.dataset.countSuffix || '';
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 4); // ease-out quart
+    const current = Math.round(eased * target);
+
+    el.textContent = prefix + current + suffix;
+
+    if (progress < 1) requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
+}
+
+// === CARD TILT 3D EFFECT ===
+function initCardTilt() {
+  if (prefersReducedMotion) return;
+
+  document.querySelectorAll('.service-card, .contact-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(() => { card.style.transition = ''; }, 500);
+    });
+  });
+}
+
+// === MAGNETIC BUTTON EFFECT ===
+function initMagneticButtons() {
+  if (prefersReducedMotion) return;
+
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(() => { btn.style.transition = ''; }, 400);
+    });
+  });
+}
+
+// === PARALLAX SCROLL ===
+function initParallax() {
+  if (prefersReducedMotion) return;
+
+  const orbs = document.querySelectorAll('.hero-orb');
+  const lines = document.querySelectorAll('.hero-line');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > window.innerHeight) return; // only in hero
+
+    orbs.forEach((orb, i) => {
+      const speed = 0.05 + (i * 0.02);
+      orb.style.transform = `translateY(${scrollY * speed}px)`;
+    });
+
+    lines.forEach((line, i) => {
+      const speed = 0.03 + (i * 0.015);
+      const baseRotate = i === 0 ? 25 : -15;
+      line.style.transform = `rotate(${baseRotate}deg) translateY(${scrollY * speed}px)`;
+    });
+  }, { passive: true });
+}
+
+// === STEP CONNECTOR DRAW ANIMATION ===
+function initStepConnectors() {
+  if (prefersReducedMotion) return;
+
+  document.querySelectorAll('.step-connector svg path').forEach(path => {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+    path.style.transition = 'stroke-dash-offset 1s ease';
+  });
+
+  const connectorObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('path').forEach(path => {
+          path.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+          path.style.strokeDashoffset = '0';
+        });
+        connectorObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.step-connector').forEach(el => {
+    connectorObserver.observe(el);
+  });
+}
+
+// === GLOW FOLLOW CURSOR ON CARDS ===
+function initGlowFollow() {
+  if (prefersReducedMotion) return;
+
+  document.querySelectorAll('.service-card, .testimonial-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--glow-x', `${x}px`);
+      card.style.setProperty('--glow-y', `${y}px`);
+    });
+  });
+}
+
+// === NAVBAR LINK UNDERLINE ANIMATION ===
+function initNavUnderline() {
+  document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
+    link.addEventListener('mouseenter', () => link.classList.add('hover'));
+    link.addEventListener('mouseleave', () => link.classList.remove('hover'));
+  });
+}
+
+// === SCROLL PROGRESS BAR ===
+function initScrollProgress() {
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    bar.style.width = `${progress}%`;
+  }, { passive: true });
 }
 
 // === WHATSAPP PHONE MASK ===
@@ -105,7 +310,6 @@ if (phoneInput) {
   phoneInput.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 11) value = value.slice(0, 11);
-
     if (value.length > 6) {
       value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
     } else if (value.length > 2) {
@@ -113,7 +317,49 @@ if (phoneInput) {
     } else if (value.length > 0) {
       value = `(${value}`;
     }
-
     e.target.value = value;
   });
 }
+
+// === LEAD FORM ===
+const leadForm = document.getElementById('leadForm');
+if (leadForm) {
+  leadForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('leadName').value;
+    const whatsapp = document.getElementById('leadWhatsapp').value;
+    const btn = leadForm.querySelector('button');
+    const originalText = btn.textContent;
+
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.textContent = 'Guia enviado!';
+      btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+
+      setTimeout(() => {
+        alert(`Obrigada, ${name}! Em breve você receberá o guia no WhatsApp ${whatsapp}.`);
+        leadForm.reset();
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 1000);
+    }, 1500);
+  });
+}
+
+// === INIT ALL ===
+document.addEventListener('DOMContentLoaded', () => {
+  animateHero();
+  initAccentShimmer();
+  initScrollReveal();
+  initCounters();
+  initCardTilt();
+  initMagneticButtons();
+  initParallax();
+  initStepConnectors();
+  initGlowFollow();
+  initNavUnderline();
+  initScrollProgress();
+});

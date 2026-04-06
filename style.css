@@ -623,7 +623,7 @@ section {
   transition: var(--transition);
 }
 
-.service-card::before {
+.service-card::after {
   content: '';
   position: absolute;
   top: 0;
@@ -641,7 +641,7 @@ section {
   box-shadow: var(--shadow-lg), 0 0 40px rgba(196, 149, 106, 0.05);
 }
 
-.service-card:hover::before {
+.service-card:hover::after {
   opacity: 1;
 }
 
@@ -1455,5 +1455,273 @@ section {
 
   .section-title {
     font-size: 1.25rem;
+  }
+}
+
+/* ============================================
+   ANIMATION SYSTEM
+   ============================================ */
+
+/* === SCROLL REVEAL BASE === */
+[data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+[data-reveal="up"] {
+  transform: translateY(40px);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-50px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(50px);
+}
+
+[data-reveal="fade"] {
+  transform: none;
+}
+
+[data-reveal].revealed {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* === TEXT ACCENT SHIMMER === */
+.text-accent {
+  position: relative;
+  background-size: 200% 100%;
+}
+
+.text-accent.shimmer-active {
+  animation: shimmer-gradient 3s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    #C4956A 0%,
+    #D4AA82 25%,
+    #F0D4B0 50%,
+    #D4AA82 75%,
+    #C4956A 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes shimmer-gradient {
+  0% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* === SCROLL PROGRESS BAR === */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--rose-gold-gradient);
+  z-index: 10000;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(196, 149, 106, 0.4);
+}
+
+/* === NAV LINK UNDERLINE ANIMATION === */
+.nav-links a:not(.nav-cta) {
+  position: relative;
+}
+
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--rose-gold);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links a:not(.nav-cta).hover::after,
+.nav-links a:not(.nav-cta):hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* === HAMBURGER ANIMATION === */
+.nav-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav-toggle span {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === CARD GLOW FOLLOW CURSOR === */
+.service-card,
+.testimonial-card {
+  --glow-x: 50%;
+  --glow-y: 50%;
+}
+
+.service-card::after,
+.testimonial-card::before {
+  pointer-events: none;
+}
+
+.service-card:hover {
+  background: radial-gradient(
+    300px circle at var(--glow-x) var(--glow-y),
+    rgba(196, 149, 106, 0.06) 0%,
+    transparent 70%
+  ), var(--navy-700);
+}
+
+.service-card.featured:hover {
+  background: radial-gradient(
+    300px circle at var(--glow-x) var(--glow-y),
+    rgba(196, 149, 106, 0.08) 0%,
+    transparent 70%
+  ), linear-gradient(180deg, var(--navy-600) 0%, var(--navy-700) 100%);
+}
+
+.testimonial-card:hover {
+  background: radial-gradient(
+    250px circle at var(--glow-x) var(--glow-y),
+    rgba(196, 149, 106, 0.05) 0%,
+    transparent 70%
+  ), var(--navy-700);
+}
+
+/* === STEP NUMBER PULSE === */
+.step-number {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(196, 149, 106, 0.2), 0 0 40px rgba(196, 149, 106, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(196, 149, 106, 0.35), 0 0 60px rgba(196, 149, 106, 0.12);
+  }
+}
+
+/* === BUTTON RIPPLE ON CLICK === */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  transition: none;
+}
+
+.btn-primary:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* === LOGO MARK GLOW PULSE === */
+.logo-mark {
+  animation: logo-pulse 4s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: 0 0 20px rgba(196, 149, 106, 0.3); }
+}
+
+/* === WHATSAPP FLOAT BOUNCE === */
+.whatsapp-float {
+  animation: whatsapp-bounce 2s ease-in-out infinite 3s;
+}
+
+@keyframes whatsapp-bounce {
+  0%, 100% { transform: translateY(0); }
+  15% { transform: translateY(-8px); }
+  30% { transform: translateY(0); }
+  45% { transform: translateY(-4px); }
+  60% { transform: translateY(0); }
+}
+
+.whatsapp-float:hover {
+  animation: none;
+  transform: scale(1.1);
+}
+
+/* === ABOUT PHOTO REVEAL === */
+.about-photo {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+
+.about-photo:hover {
+  transform: scale(1.02);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 50px rgba(196, 149, 106, 0.15);
+}
+
+/* === FORM INPUT FOCUS ANIMATION === */
+.form-group input {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.form-group input:focus {
+  transform: translateY(-1px);
+}
+
+/* === STARS TWINKLE IN TESTIMONIALS === */
+.testimonial-stars svg {
+  animation: star-twinkle 2s ease-in-out infinite;
+}
+
+.testimonial-stars svg:nth-child(2) { animation-delay: 0.2s; }
+.testimonial-stars svg:nth-child(3) { animation-delay: 0.4s; }
+.testimonial-stars svg:nth-child(4) { animation-delay: 0.6s; }
+.testimonial-stars svg:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* === PREFERS REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .text-accent.shimmer-active,
+  .step-number,
+  .logo-mark,
+  .whatsapp-float,
+  .testimonial-stars svg {
+    animation: none !important;
+  }
+
+  .scroll-progress {
+    display: none;
   }
 }
