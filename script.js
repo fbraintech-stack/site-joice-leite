@@ -116,7 +116,7 @@ function initScrollReveal() {
     { selector: '.step-card', reveal: 'up', stagger: 200 },
     { selector: '.step-connector', reveal: 'fade', stagger: 300 },
     { selector: '.about-image', reveal: 'left' },
-    { selector: '.about-text', reveal: 'right' },
+    { selector: '.about-text', reveal: 'right', fixedDelay: 200 },
     { selector: '.testimonial-card', reveal: 'up', stagger: 150 },
     { selector: '.lead-magnet-text', reveal: 'left' },
     { selector: '.lead-magnet-form', reveal: 'right' },
@@ -127,7 +127,9 @@ function initScrollReveal() {
     const elements = document.querySelectorAll(group.selector);
     elements.forEach((el, i) => {
       el.dataset.reveal = group.reveal;
-      el.dataset.revealDelay = group.stagger ? (i * group.stagger).toString() : '0';
+      el.dataset.revealDelay = group.fixedDelay
+        ? group.fixedDelay.toString()
+        : group.stagger ? (i * group.stagger).toString() : '0';
       revealObserver.observe(el);
     });
   });
