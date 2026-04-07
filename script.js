@@ -335,23 +335,86 @@ if (leadForm) {
     const name = document.getElementById('leadName').value;
     const whatsapp = document.getElementById('leadWhatsapp').value;
     const btn = leadForm.querySelector('button');
-    const originalText = btn.textContent;
+    const originalHTML = btn.innerHTML;
 
     btn.textContent = 'Enviando...';
     btn.disabled = true;
 
     setTimeout(() => {
-      btn.textContent = 'Guia enviado!';
+      btn.textContent = 'Pronto!';
       btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
 
-      setTimeout(() => {
-        alert(`Obrigada, ${name}! Em breve você receberá o guia no WhatsApp ${whatsapp}.`);
+      // Popup de agradecimento
+      showThankYouPopup(name, () => {
+        // Download do PDF ao clicar OK
+        const link = document.createElement('a');
+        link.href = 'assets/guia-7-armadilhas.pdf';
+        link.download = '7-Armadilhas-Imoveis-Joice-Leite.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Resetar form
         leadForm.reset();
-        btn.textContent = originalText;
+        btn.innerHTML = originalHTML;
         btn.style.background = '';
         btn.disabled = false;
-      }, 1000);
-    }, 1500);
+      });
+    }, 1200);
+  });
+}
+
+function showThankYouPopup(name, onClose) {
+  // Overlay
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(11,17,32,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(4px)';
+
+  // Modal
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background:linear-gradient(145deg,#111B30,#0B1120);border:1px solid #C4956A;border-radius:16px;padding:40px 36px;max-width:420px;width:90%;text-align:center;transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 20px 60px rgba(0,0,0,0.5)';
+
+  modal.innerHTML = `
+    <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#C4956A,#8B6A4A);display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3 style="font-family:'Cinzel',serif;color:#C4956A;font-size:1.3rem;margin:0 0 12px">Obrigada, ${name}!</h3>
+    <p style="font-family:'Inter',sans-serif;color:#F1F0EE;font-size:0.95rem;line-height:1.6;margin:0 0 8px">Seu guia <strong>"7 Armadilhas Escondidas em Imóveis Perfeitos"</strong> está pronto.</p>
+    <p style="font-family:'Inter',sans-serif;color:#A0A0B0;font-size:0.85rem;line-height:1.5;margin:0 0 24px">Clique no botão abaixo para baixar o PDF.</p>
+    <button id="popupDownloadBtn" style="font-family:'Inter',sans-serif;background:linear-gradient(135deg,#C4956A,#A07B55);color:#0B1120;border:none;padding:14px 36px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;box-shadow:0 4px 15px rgba(196,149,106,0.3)">
+      Baixar meu guia grátis
+    </button>
+  `;
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  // Animate in
+  requestAnimationFrame(() => {
+    overlay.style.opacity = '1';
+    modal.style.transform = 'scale(1)';
+  });
+
+  // Hover effect no botão
+  const dlBtn = document.getElementById('popupDownloadBtn');
+  dlBtn.addEventListener('mouseenter', () => {
+    dlBtn.style.transform = 'translateY(-2px)';
+    dlBtn.style.boxShadow = '0 6px 20px rgba(196,149,106,0.4)';
+  });
+  dlBtn.addEventListener('mouseleave', () => {
+    dlBtn.style.transform = '';
+    dlBtn.style.boxShadow = '0 4px 15px rgba(196,149,106,0.3)';
+  });
+
+  // Close on button click
+  dlBtn.addEventListener('click', () => {
+    overlay.style.opacity = '0';
+    modal.style.transform = 'scale(0.9)';
+    setTimeout(() => {
+      document.body.removeChild(overlay);
+      document.body.style.overflow = '';
+      if (onClose) onClose();
+    }, 300);
   });
 }
 
