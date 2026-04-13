@@ -1,394 +1,385 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Escritório de advocacia com atuação em Direito Imobiliário em São José dos Campos e região do Vale do Paraíba.">
-    <meta name="robots" content="index, follow">
-    <title>Joice Leite — Advocacia em Direito Imobiliário — São José dos Campos/SP</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #FAFAF8;
-            --bg-alt: #F2F0EA;
-            --ink: #0B1120;
-            --ink-soft: #374151;
-            --ink-mute: #6B7280;
-            --accent: #C4956A;
-            --border: #E5E0D5;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            font-weight: 300;
-            background: var(--bg);
-            color: var(--ink-soft);
-            line-height: 1.75;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
-
-        .container {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Header */
-        header {
-            padding: 2.5rem 0 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .brand {
-            font-family: 'Cormorant Garamond', serif;
-            line-height: 1.1;
-        }
-
-        .brand-name {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--ink);
-            letter-spacing: 0.02em;
-        }
-
-        .brand-sub {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--ink-mute);
-            margin-top: 0.2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--ink-soft);
-            text-decoration: none;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            transition: color 0.2s;
-        }
-
-        nav a:hover { color: var(--accent); }
-
-        /* Hero */
-        .hero {
-            padding: 5rem 0 4rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4.5vw, 3rem);
-            font-weight: 500;
-            color: var(--ink);
-            line-height: 1.15;
-            letter-spacing: 0.005em;
-            margin-bottom: 1.2rem;
-        }
-
-        .hero p {
-            font-size: 1.05rem;
-            color: var(--ink-soft);
-            max-width: 620px;
-            margin-bottom: 2rem;
-        }
-
-        .hero .divider {
-            width: 48px;
-            height: 1px;
-            background: var(--accent);
-            margin-bottom: 1.5rem;
-        }
-
-        .identification {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            color: var(--ink-mute);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .identification strong {
-            color: var(--ink);
-            font-weight: 500;
-        }
-
-        /* Section generic */
-        section {
-            padding: 4.5rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        section h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 500;
-            color: var(--ink);
-            margin-bottom: 0.6rem;
-            letter-spacing: 0.01em;
-        }
-
-        .section-mark {
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 0.8rem;
-            display: block;
-        }
-
-        section h2 + p,
-        section .intro {
-            font-size: 1rem;
-            color: var(--ink-soft);
-            max-width: 680px;
-            margin-bottom: 2rem;
-        }
-
-        section p + p { margin-top: 1rem; }
-
-        /* Áreas */
-        .areas-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        @media (min-width: 720px) {
-            .areas-list { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 3rem; }
-        }
-
-        .area-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.35rem;
-            font-weight: 500;
-            color: var(--ink);
-            margin-bottom: 0.5rem;
-        }
-
-        .area-item p {
-            font-size: 0.95rem;
-            color: var(--ink-soft);
-            line-height: 1.7;
-        }
-
-        /* Contato */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        @media (min-width: 600px) {
-            .contact-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        .contact-item h3 {
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--ink-mute);
-            margin-bottom: 0.6rem;
-        }
-
-        .contact-item p {
-            font-size: 1rem;
-            color: var(--ink);
-            line-height: 1.6;
-        }
-
-        .contact-item a {
-            color: var(--ink);
-            text-decoration: none;
-            border-bottom: 1px solid var(--accent);
-            transition: color 0.2s;
-        }
-
-        .contact-item a:hover { color: var(--accent); }
-
-        /* Footer */
-        footer {
-            padding: 3rem 0 2.5rem;
-            background: var(--bg-alt);
-            font-size: 0.82rem;
-            color: var(--ink-mute);
-            text-align: center;
-            line-height: 1.8;
-        }
-
-        footer strong {
-            color: var(--ink);
-            font-weight: 500;
-            letter-spacing: 0.02em;
-        }
-
-        footer .compliance-note {
-            max-width: 640px;
-            margin: 1.2rem auto 1rem;
-            font-size: 0.78rem;
-            font-style: italic;
-        }
-
-        footer .copyright {
-            margin-top: 1rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            header { padding: 1.8rem 0 1.2rem; }
-            nav ul { gap: 1.2rem; }
-            nav a { font-size: 0.78rem; }
-            .hero { padding: 3rem 0 2.5rem; }
-            section { padding: 3rem 0; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joice Leite — Advocacia em Direito Imobiliário — São José dos Campos/SP</title>
+  <meta name="description" content="Escritório de advocacia com atuação em Direito Imobiliário em São José dos Campos e região do Vale do Paraíba.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Joice Leite — Advocacia em Direito Imobiliário">
+  <meta property="og:description" content="Atuação profissional em Direito Imobiliário em São José dos Campos e Vale do Paraíba.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23C4956A'/><text x='50' y='62' font-size='40' font-family='serif' font-weight='600' fill='white' text-anchor='middle'>JL</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Attorney",
+    "name": "Joice Leite — Advocacia",
+    "description": "Escritório de advocacia com atuação em Direito Imobiliário e Direito das Sucessões em São José dos Campos e região do Vale do Paraíba.",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -23.1896, "longitude": -45.8841 },
+      "geoRadius": "100000"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Juiz David Barrilli, 304, Jardim Aquarius",
+      "addressLocality": "São José dos Campos",
+      "addressRegion": "SP",
+      "postalCode": "12246-200",
+      "addressCountry": "BR"
+    },
+    "knowsAbout": ["Direito Imobiliário", "Compra e Venda de Imóveis", "Due Diligence Imobiliária", "Regularização de Imóveis", "Contratos Imobiliários", "Direito Condominial"]
+  }
+  </script>
 </head>
 <body>
-    <header>
-        <div class="container header-inner">
-            <div class="brand">
-                <div class="brand-name">Joice Leite</div>
-                <div class="brand-sub">Advocacia</div>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#areas">Áreas de Atuação</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-content">
+      <a href="#" class="nav-logo">
+        <span class="logo-mark">JL</span>
+        <span class="logo-text">Joice Leite</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#areas">Áreas de Atuação</a></li>
+        <li><a href="#atuacao">Como Atuo</a></li>
+        <li><a href="#faq">Perguntas Frequentes</a></li>
+        <li><a href="#contato" class="nav-cta">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-line hero-line-1"></div>
+    <div class="hero-line hero-line-2"></div>
+    <div class="container hero-wrapper">
+      <div class="hero-content">
+        <div class="hero-badge">Direito Imobiliário · Direito das Sucessões</div>
+        <h1 class="hero-title">
+          Advocacia em Direito Imobiliário
+          <span class="text-accent">em São José dos Campos e Vale do Paraíba.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Atuação profissional nas principais matérias que envolvem a propriedade imóvel, a posse, os contratos imobiliários e a regularização de imóveis perante os cartórios e órgãos públicos competentes.
+        </p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn btn-primary">Agendar consulta</a>
+          <a href="#areas" class="btn btn-outline">Conhecer áreas de atuação</a>
         </div>
-    </header>
-
-    <main>
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="container">
-                <div class="divider"></div>
-                <h1 id="hero-title">Advocacia em Direito Imobiliário</h1>
-                <p>Atuação em São José dos Campos e região do Vale do Paraíba.</p>
-                <div class="identification">
-                    <strong>Joice Leite</strong> &nbsp;—&nbsp; Advogada &nbsp;—&nbsp; OAB/SP nº [a confirmar]
-                </div>
-            </div>
-        </section>
-
-        <section id="sobre" aria-labelledby="sobre-title">
-            <div class="container">
-                <span class="section-mark">Apresentação</span>
-                <h2 id="sobre-title">Sobre</h2>
-                <p>Joice Leite é advogada inscrita na Ordem dos Advogados do Brasil, Seccional São Paulo, sob o nº [a confirmar]. Atua profissionalmente na área de Direito Imobiliário, com escritório estabelecido em São José dos Campos, no estado de São Paulo.</p>
-                <p>Sua atuação abrange as principais matérias que envolvem a propriedade imóvel, a posse, os contratos imobiliários e a regularização de imóveis perante os cartórios e órgãos públicos competentes.</p>
-                <p>O atendimento é prestado mediante consulta prévia agendada, preferencialmente por endereço eletrônico.</p>
-            </div>
-        </section>
-
-        <section id="areas" aria-labelledby="areas-title">
-            <div class="container">
-                <span class="section-mark">Matérias</span>
-                <h2 id="areas-title">Áreas de Atuação</h2>
-                <p class="intro">O escritório presta serviços jurídicos nas seguintes matérias do Direito Imobiliário:</p>
-
-                <div class="areas-list">
-                    <div class="area-item">
-                        <h3>Compra e venda de imóveis</h3>
-                        <p>Análise documental do imóvel, verificação da cadeia dominial, análise de certidões do vendedor e do imóvel, elaboração e revisão de contratos de compra e venda e acompanhamento da escritura pública.</p>
-                    </div>
-
-                    <div class="area-item">
-                        <h3>Due diligence imobiliária</h3>
-                        <p>Levantamento de certidões, análise de riscos jurídicos associados ao imóvel e ao vendedor, e emissão de parecer técnico sobre a viabilidade da operação.</p>
-                    </div>
-
-                    <div class="area-item">
-                        <h3>Regularização de imóveis</h3>
-                        <p>Instrução de processos administrativos e judiciais para a regularização fundiária, averbação de construções, retificação de área, usucapião e adjudicação compulsória.</p>
-                    </div>
-
-                    <div class="area-item">
-                        <h3>Contratos imobiliários</h3>
-                        <p>Elaboração, análise e revisão de contratos de locação, comodato, permuta, cessão de direitos, compromisso de compra e venda e instrumentos particulares em geral.</p>
-                    </div>
-
-                    <div class="area-item">
-                        <h3>Direito condominial</h3>
-                        <p>Assessoria a condomínios edilícios e condôminos, elaboração e revisão de convenções e regimentos internos, e atuação em questões relativas à inadimplência condominial e deliberações assembleares.</p>
-                    </div>
-
-                    <div class="area-item">
-                        <h3>Assessoria a incorporações</h3>
-                        <p>Análise de documentação e instrução para registro de incorporações imobiliárias.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contato" aria-labelledby="contato-title">
-            <div class="container">
-                <span class="section-mark">Informações</span>
-                <h2 id="contato-title">Contato</h2>
-                <p class="intro">Para agendamento de consulta ou envio de documentos para análise prévia, utilize os canais abaixo.</p>
-
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3>Endereço</h3>
-                        <p>[Endereço a confirmar]<br>São José dos Campos — SP</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>Correio eletrônico</h3>
-                        <p><a href="mailto:contato@joiceleite.com.br">contato@joiceleite.com.br</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>Telefone</h3>
-                        <p>[a confirmar]</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>Horário de atendimento</h3>
-                        <p>Segunda a sexta-feira<br>9h às 18h, mediante agendamento</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p><strong>Joice Leite — Advocacia</strong></p>
-            <p>OAB/SP nº [a confirmar] &nbsp;·&nbsp; São José dos Campos — SP</p>
-            <p class="compliance-note">
-                Este site tem caráter meramente informativo, em conformidade com o Código de Ética e Disciplina da Ordem dos Advogados do Brasil e com o Provimento nº 205/2021 do Conselho Federal da OAB.
-            </p>
-            <p class="copyright">© 2026 Joice Leite — Todos os direitos reservados.</p>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Joice Leite — Advogada — OAB/SP nº [a confirmar]</span>
+          </div>
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>São José dos Campos · Vale do Paraíba · SP</span>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </header>
+
+  <!-- SOBRE -->
+  <section class="about" id="sobre">
+    <div class="container about-content">
+      <div class="about-image">
+        <img src="assets/joice-foto.jpg" alt="Joice Leite — Advogada" class="about-photo" loading="lazy">
+      </div>
+      <div class="about-text">
+        <span class="section-label">Apresentação</span>
+        <h2 class="section-title">Sobre o escritório</h2>
+        <p>Joice Leite iniciou a carreira profissional ainda no ensino médio, como estagiária na Justiça Estadual da Comarca de Paraibuna, no estado de São Paulo. Ingressou na Faculdade de Direito em 2007, como bolsista do Programa Universidade para Todos (Prouni), e concluiu a graduação em 2011, ano em que foi aprovada no IV Exame de Ordem e inscrita na Ordem dos Advogados do Brasil, Seccional São Paulo, sob o nº [a confirmar].</p>
+        <p>Ao longo da trajetória profissional, atuou sobretudo na esfera extrajudicial, com concentração nas áreas de Direito Imobiliário e Direito das Sucessões. Atualmente mantém escritório estabelecido em São José dos Campos, com atendimento às cidades da região do Vale do Paraíba.</p>
+        <p>A atuação na área imobiliária compreende a análise documental, a elaboração e revisão de contratos, a regularização de imóveis perante cartórios e órgãos públicos e a assessoria em operações de compra e venda, nos termos da legislação civil e processual civil vigente. O atendimento é realizado mediante consulta prévia agendada.</p>
+        <blockquote class="about-quote">
+          A atuação profissional é orientada pelos princípios da discrição, da sobriedade e da ética profissional.
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁREAS DE ATUAÇÃO -->
+  <section class="services" id="areas">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Matérias</span>
+        <h2 class="section-title">Áreas de Atuação</h2>
+        <p class="section-description">O escritório presta serviços jurídicos nas seguintes matérias do Direito Imobiliário.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-number">01</div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 class="service-title">Compra e venda de imóveis</h3>
+          <p class="service-text">Análise documental do imóvel, verificação da cadeia dominial, análise das certidões do vendedor e do imóvel, elaboração e revisão de contratos de compra e venda e acompanhamento da lavratura da escritura pública.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">02</div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="service-title">Due diligence imobiliária</h3>
+          <p class="service-text">Levantamento de certidões, análise dos riscos jurídicos associados ao imóvel e ao vendedor, e emissão de parecer técnico sobre a viabilidade jurídica da operação imobiliária pretendida.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">03</div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="14" x2="15" y2="14"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+          </div>
+          <h3 class="service-title">Regularização de imóveis</h3>
+          <p class="service-text">Instrução de processos administrativos e judiciais voltados à regularização fundiária, à averbação de construções, à retificação de área, bem como à usucapião e à adjudicação compulsória, nos termos da legislação aplicável.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">04</div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <h3 class="service-title">Contratos imobiliários</h3>
+          <p class="service-text">Elaboração, análise e revisão de contratos de locação, comodato, permuta, cessão de direitos, compromisso de compra e venda e demais instrumentos particulares que envolvam direitos reais sobre imóveis.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">05</div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+          </div>
+          <h3 class="service-title">Direito condominial</h3>
+          <p class="service-text">Assessoria jurídica a condomínios edilícios e a condôminos, com elaboração e revisão de convenções e regimentos internos, e atuação nas questões relativas à inadimplência condominial e às deliberações assembleares.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">06</div>
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3 class="service-title">Assessoria a incorporações</h3>
+          <p class="service-text">Análise de documentação e instrução dos procedimentos necessários ao registro de incorporações imobiliárias, nos termos da legislação específica aplicável ao setor.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO ATUO -->
+  <section class="steps" id="atuacao">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Procedimento</span>
+        <h2 class="section-title">Como o escritório atua</h2>
+        <p class="section-description">A atuação profissional observa três etapas bem definidas, conforme a natureza da demanda submetida à análise.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Consulta inicial e análise documental</h3>
+          <p class="step-text">Em consulta prévia agendada, é realizada a análise da situação jurídica apresentada e dos documentos relacionados ao imóvel e às partes envolvidas, para fins de verificação da viabilidade técnica das medidas cabíveis.</p>
+        </div>
+        <div class="step-connector">
+          <svg width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M30 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Instrução do procedimento</h3>
+          <p class="step-text">Definida a via adequada — administrativa, extrajudicial ou judicial — é promovida a instrução do procedimento, com a elaboração das peças jurídicas necessárias e a reunião da documentação exigida pela legislação e pelos órgãos competentes.</p>
+        </div>
+        <div class="step-connector">
+          <svg width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M0 12h36M30 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Acompanhamento até a conclusão</h3>
+          <p class="step-text">O escritório acompanha integralmente o trâmite do procedimento até a sua conclusão, com a prática dos atos processuais e extraprocessuais necessários, inclusive aqueles relacionados ao registro dos atos imobiliários perante o cartório competente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Conteúdo informativo</span>
+        <h2 class="section-title">Perguntas frequentes sobre Direito Imobiliário</h2>
+        <p class="section-description">As informações abaixo têm caráter meramente informativo e não substituem a orientação jurídica individualizada.</p>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>O que é a due diligence imobiliária?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>A due diligence imobiliária é o procedimento de análise jurídica prévia à aquisição de um imóvel, que compreende o levantamento de certidões pessoais do vendedor, certidões do imóvel, verificação da cadeia dominial e análise dos eventuais riscos jurídicos associados à operação. Seu objetivo é permitir uma decisão informada quanto à viabilidade jurídica do negócio pretendido.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Quais documentos costumam ser analisados na compra de um imóvel?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>De modo geral, analisam-se a matrícula atualizada do imóvel, as certidões negativas de débitos municipais (IPTU) e condominiais, as certidões pessoais do vendedor (cíveis, trabalhistas, fiscais e criminais), o histórico dominial e, conforme o caso, documentos específicos relativos à situação fática do imóvel. A relação completa depende das particularidades de cada operação.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>O que é a usucapião?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>A usucapião é forma de aquisição originária da propriedade imobiliária, prevista nos artigos 1.238 a 1.244 do Código Civil, decorrente da posse prolongada do imóvel, observados os requisitos legais aplicáveis a cada modalidade. A Lei nº 13.465/2017 passou a admitir, adicionalmente, o procedimento de usucapião extrajudicial perante o cartório de registro de imóveis.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Qual é a diferença entre escritura pública e registro de imóvel?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>A escritura pública é o instrumento lavrado perante o tabelionato de notas que formaliza o negócio jurídico, ao passo que o registro é o ato praticado perante o cartório de registro de imóveis que opera a efetiva transferência da propriedade, nos termos dos artigos 1.245 e seguintes do Código Civil. A propriedade somente se transmite após o registro.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>O que é a adjudicação compulsória?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>A adjudicação compulsória é a medida jurídica cabível nas hipóteses em que o promitente vendedor, obrigado por compromisso de compra e venda quitado, recusa-se a outorgar a escritura definitiva. A Lei nº 14.382/2022 passou a admitir, adicionalmente, o procedimento de adjudicação compulsória na esfera extrajudicial, perante o cartório de registro de imóveis.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>O que é o direito condominial?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>O direito condominial é o ramo do Direito Imobiliário que regula as relações jurídicas entre os condôminos em imóveis sujeitos ao regime de condomínio edilício, conforme disposto nos artigos 1.331 a 1.358 do Código Civil e na Lei nº 4.591/1964. Abrange matérias como a convenção do condomínio, as deliberações assembleares e a cobrança de encargos condominiais.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact" id="contato">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Informações</span>
+        <h2 class="section-title">Contato</h2>
+        <p class="section-description">Para agendamento de consulta ou envio de documentos para análise prévia, utilize os canais abaixo. O atendimento é prestado mediante consulta previamente agendada.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Endereço</h3>
+          <p>Edifício Empresarial Atlântico<br>Rua Juiz David Barrilli, 304<br>Jardim Aquarius — São José dos Campos/SP<br>CEP 12246-200</p>
+          <span class="contact-link">Vale do Paraíba e região</span>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h3>Telefone</h3>
+          <p>Para contato telefônico ou solicitação de agendamento de consulta.</p>
+          <a href="tel:+5512997681554" class="contact-link">(12) 99768-1554</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Correio eletrônico</h3>
+          <p>Para envio de documentos ou solicitação de agendamento de consulta.</p>
+          <a href="mailto:contato@joiceleite.com.br" class="contact-link">contato@joiceleite.com.br</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <span class="logo-mark">JL</span>
+            <span class="logo-text">Joice Leite</span>
+          </div>
+          <p class="footer-tagline">Advocacia em Direito Imobiliário</p>
+          <p class="footer-description">Escritório de advocacia estabelecido em São José dos Campos, com atuação profissional em Direito Imobiliário e Direito das Sucessões no Vale do Paraíba.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Áreas</h4>
+          <ul>
+            <li><a href="#areas">Compra e venda de imóveis</a></li>
+            <li><a href="#areas">Due diligence imobiliária</a></li>
+            <li><a href="#areas">Regularização de imóveis</a></li>
+            <li><a href="#areas">Contratos imobiliários</a></li>
+            <li><a href="#areas">Direito condominial</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Informações</h4>
+          <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#atuacao">Como atuo</a></li>
+            <li><a href="#faq">Perguntas frequentes</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Identificação profissional</h4>
+          <div class="footer-oab">
+            <p><strong>Joice Leite</strong></p>
+            <p>Advogada — OAB/SP nº [a confirmar]</p>
+            <p>Rua Juiz David Barrilli, 304</p>
+            <p>Jardim Aquarius — São José dos Campos/SP</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="max-width: 720px; margin: 0 auto 0.8rem; font-style: italic; font-size: 0.82rem;">
+          Este site tem caráter meramente informativo, em conformidade com o Código de Ética e Disciplina da Ordem dos Advogados do Brasil e com o Provimento nº 205/2021 do Conselho Federal da OAB. O conteúdo aqui disponibilizado não constitui consulta jurídica e não substitui a orientação profissional individualizada.
+        </p>
+        <p>&copy; 2026 Joice Leite — Advocacia. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
