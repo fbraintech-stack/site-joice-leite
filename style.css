@@ -308,7 +308,7 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('images/hero-bg-skyline.png') center bottom / cover no-repeat;
+  background: image-set(url('images/hero-bg-skyline.webp') type('image/webp'), url('images/hero-bg-skyline.png') type('image/png')) center bottom / cover no-repeat;
   opacity: 0.12;
   z-index: 0;
   pointer-events: none;
@@ -1076,7 +1076,7 @@ section {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('images/leadmagnet-bg-juridico.png') center center / cover no-repeat;
+  background: image-set(url('images/leadmagnet-bg-juridico.webp') type('image/webp'), url('images/leadmagnet-bg-juridico.png') type('image/png')) center center / cover no-repeat;
   opacity: 0.10;
   z-index: 0;
   pointer-events: none;
