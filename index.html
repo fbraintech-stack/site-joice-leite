@@ -3,87 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Joice Leite — Advocacia</title>
+    <meta name="description" content="Escritório de advocacia com atuação em Direito Imobiliário em São José dos Campos e região do Vale do Paraíba.">
+    <meta name="robots" content="index, follow">
+    <title>Joice Leite — Advocacia em Direito Imobiliário — São José dos Campos/SP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body {
-            height: 100%;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #FAFAF8;
-            color: #1A1F2E;
+
+        :root {
+            --bg: #FAFAF8;
+            --bg-alt: #F2F0EA;
+            --ink: #0B1120;
+            --ink-soft: #374151;
+            --ink-mute: #6B7280;
+            --accent: #C4956A;
+            --border: #E5E0D5;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-weight: 300;
+            background: var(--bg);
+            color: var(--ink-soft);
+            line-height: 1.75;
+            font-size: 16px;
             -webkit-font-smoothing: antialiased;
         }
-        body {
+
+        .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2.5rem 0 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            line-height: 1.6;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        .card {
-            max-width: 520px;
-            width: 100%;
-            text-align: center;
-            padding: 3rem 2rem;
+
+        .brand {
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.1;
         }
-        .mark {
-            font-size: 1rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #6B7280;
-            margin-bottom: 0.5rem;
-        }
-        h1 {
-            font-size: 1.75rem;
+
+        .brand-name {
+            font-size: 1.5rem;
             font-weight: 500;
-            color: #0B1120;
-            margin-bottom: 2.5rem;
+            color: var(--ink);
             letter-spacing: 0.02em;
         }
-        .divider {
+
+        .brand-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin-top: 0.2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            padding: 5rem 0 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1.15;
+            letter-spacing: 0.005em;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--ink-soft);
+            max-width: 620px;
+            margin-bottom: 2rem;
+        }
+
+        .hero .divider {
             width: 48px;
             height: 1px;
-            background: #C4956A;
-            margin: 0 auto 2.5rem;
+            background: var(--accent);
+            margin-bottom: 1.5rem;
         }
-        p {
-            font-size: 1rem;
-            color: #4B5563;
-            margin-bottom: 1rem;
-        }
-        .contact {
-            margin-top: 2rem;
-            font-size: 0.95rem;
-            color: #4B5563;
-        }
-        .contact a {
-            color: #0B1120;
-            text-decoration: none;
-            border-bottom: 1px solid #C4956A;
-        }
-        .contact a:hover { color: #C4956A; }
-        .location {
-            margin-top: 2rem;
+
+        .identification {
+            font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            color: #9CA3AF;
+            color: var(--ink-mute);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .identification strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        /* Section generic */
+        section {
+            padding: 4.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.01em;
+        }
+
+        .section-mark {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        section h2 + p,
+        section .intro {
+            font-size: 1rem;
+            color: var(--ink-soft);
+            max-width: 680px;
+            margin-bottom: 2rem;
+        }
+
+        section p + p { margin-top: 1rem; }
+
+        /* Áreas */
+        .areas-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 720px) {
+            .areas-list { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 3rem; }
+        }
+
+        .area-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .area-item p {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            line-height: 1.7;
+        }
+
+        /* Contato */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 600px) {
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .contact-item h3 {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin-bottom: 0.6rem;
+        }
+
+        .contact-item p {
+            font-size: 1rem;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .contact-item a {
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover { color: var(--accent); }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0 2.5rem;
+            background: var(--bg-alt);
+            font-size: 0.82rem;
+            color: var(--ink-mute);
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        footer strong {
+            color: var(--ink);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        footer .compliance-note {
+            max-width: 640px;
+            margin: 1.2rem auto 1rem;
+            font-size: 0.78rem;
+            font-style: italic;
+        }
+
+        footer .copyright {
+            margin-top: 1rem;
+            font-size: 0.75rem;
             letter-spacing: 0.05em;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            header { padding: 1.8rem 0 1.2rem; }
+            nav ul { gap: 1.2rem; }
+            nav a { font-size: 0.78rem; }
+            .hero { padding: 3rem 0 2.5rem; }
+            section { padding: 3rem 0; }
         }
     </style>
 </head>
 <body>
-    <main class="card">
-        <p class="mark">Joice Leite</p>
-        <h1>Advocacia</h1>
-        <div class="divider"></div>
-        <p>Site em manutenção temporária.</p>
-        <p>Estamos atualizando as informações deste endereço.</p>
-        <p class="contact">
-            Para contato, envie e-mail para<br>
-            <a href="mailto:contato@joiceleite.com.br">contato@joiceleite.com.br</a>
-        </p>
-        <p class="location">São José dos Campos — SP</p>
+    <header>
+        <div class="container header-inner">
+            <div class="brand">
+                <div class="brand-name">Joice Leite</div>
+                <div class="brand-sub">Advocacia</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#areas">Áreas de Atuação</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="divider"></div>
+                <h1 id="hero-title">Advocacia em Direito Imobiliário</h1>
+                <p>Atuação em São José dos Campos e região do Vale do Paraíba.</p>
+                <div class="identification">
+                    <strong>Joice Leite</strong> &nbsp;—&nbsp; Advogada &nbsp;—&nbsp; OAB/SP nº [a confirmar]
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" aria-labelledby="sobre-title">
+            <div class="container">
+                <span class="section-mark">Apresentação</span>
+                <h2 id="sobre-title">Sobre</h2>
+                <p>Joice Leite é advogada inscrita na Ordem dos Advogados do Brasil, Seccional São Paulo, sob o nº [a confirmar]. Atua profissionalmente na área de Direito Imobiliário, com escritório estabelecido em São José dos Campos, no estado de São Paulo.</p>
+                <p>Sua atuação abrange as principais matérias que envolvem a propriedade imóvel, a posse, os contratos imobiliários e a regularização de imóveis perante os cartórios e órgãos públicos competentes.</p>
+                <p>O atendimento é prestado mediante consulta prévia agendada, preferencialmente por endereço eletrônico.</p>
+            </div>
+        </section>
+
+        <section id="areas" aria-labelledby="areas-title">
+            <div class="container">
+                <span class="section-mark">Matérias</span>
+                <h2 id="areas-title">Áreas de Atuação</h2>
+                <p class="intro">O escritório presta serviços jurídicos nas seguintes matérias do Direito Imobiliário:</p>
+
+                <div class="areas-list">
+                    <div class="area-item">
+                        <h3>Compra e venda de imóveis</h3>
+                        <p>Análise documental do imóvel, verificação da cadeia dominial, análise de certidões do vendedor e do imóvel, elaboração e revisão de contratos de compra e venda e acompanhamento da escritura pública.</p>
+                    </div>
+
+                    <div class="area-item">
+                        <h3>Due diligence imobiliária</h3>
+                        <p>Levantamento de certidões, análise de riscos jurídicos associados ao imóvel e ao vendedor, e emissão de parecer técnico sobre a viabilidade da operação.</p>
+                    </div>
+
+                    <div class="area-item">
+                        <h3>Regularização de imóveis</h3>
+                        <p>Instrução de processos administrativos e judiciais para a regularização fundiária, averbação de construções, retificação de área, usucapião e adjudicação compulsória.</p>
+                    </div>
+
+                    <div class="area-item">
+                        <h3>Contratos imobiliários</h3>
+                        <p>Elaboração, análise e revisão de contratos de locação, comodato, permuta, cessão de direitos, compromisso de compra e venda e instrumentos particulares em geral.</p>
+                    </div>
+
+                    <div class="area-item">
+                        <h3>Direito condominial</h3>
+                        <p>Assessoria a condomínios edilícios e condôminos, elaboração e revisão de convenções e regimentos internos, e atuação em questões relativas à inadimplência condominial e deliberações assembleares.</p>
+                    </div>
+
+                    <div class="area-item">
+                        <h3>Assessoria a incorporações</h3>
+                        <p>Análise de documentação e instrução para registro de incorporações imobiliárias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" aria-labelledby="contato-title">
+            <div class="container">
+                <span class="section-mark">Informações</span>
+                <h2 id="contato-title">Contato</h2>
+                <p class="intro">Para agendamento de consulta ou envio de documentos para análise prévia, utilize os canais abaixo.</p>
+
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <h3>Endereço</h3>
+                        <p>[Endereço a confirmar]<br>São José dos Campos — SP</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Correio eletrônico</h3>
+                        <p><a href="mailto:contato@joiceleite.com.br">contato@joiceleite.com.br</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Telefone</h3>
+                        <p>[a confirmar]</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Horário de atendimento</h3>
+                        <p>Segunda a sexta-feira<br>9h às 18h, mediante agendamento</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Joice Leite — Advocacia</strong></p>
+            <p>OAB/SP nº [a confirmar] &nbsp;·&nbsp; São José dos Campos — SP</p>
+            <p class="compliance-note">
+                Este site tem caráter meramente informativo, em conformidade com o Código de Ética e Disciplina da Ordem dos Advogados do Brasil e com o Provimento nº 205/2021 do Conselho Federal da OAB.
+            </p>
+            <p class="copyright">© 2026 Joice Leite — Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
